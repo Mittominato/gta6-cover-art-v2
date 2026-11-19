@@ -1,0 +1,198 @@
+/* Vice Sunset Cover Lab — dark neon editor UI. */
+@font-face {
+  font-family: 'Anton';
+  src: url('fonts/Anton-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lobster';
+  src: url('fonts/Lobster-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+:root {
+  --bg: #0d0a18;
+  --panel: #171226;
+  --panel-2: #1e1830;
+  --line: #2e2547;
+  --text: #f2eefc;
+  --muted: #b3a8cf;
+  --accent: #ff5e62;
+  --accent-2: #ff9a3c;
+  --accent-3: #00e5ff;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  min-height: 100vh;
+}
+
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(90deg, #1b0f2e, #0d0a18 60%);
+}
+
+.brand { display: flex; gap: 14px; align-items: center; }
+
+.brand-mark {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-family: Anton, 'Arial Black', sans-serif;
+  font-size: 20px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent-2), var(--accent) 55%, #7b2ff7);
+  box-shadow: 0 0 18px rgba(255, 94, 98, 0.45);
+}
+
+.brand h1 {
+  margin: 0;
+  font-family: Anton, 'Arial Black', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  font-size: 26px;
+}
+
+.tagline { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+
+.export-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.export-label { color: var(--muted); font-size: 13px; margin-right: 2px; }
+
+button {
+  font: inherit;
+  color: var(--text);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+button:hover { border-color: var(--accent); }
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--accent-3);
+  outline-offset: 2px;
+}
+button.primary {
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  border-color: transparent;
+  color: #fff;
+  font-weight: 600;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 18px;
+  padding: 18px 22px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.stage-wrap {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  min-height: 200px;
+}
+.stage-wrap.shot-mode { border: 0; border-radius: 0; box-shadow: none; }
+
+#stage { display: block; width: 100%; height: auto; touch-action: none; }
+
+.notice { color: var(--muted); font-size: 14px; margin: 10px 2px; min-height: 20px; }
+
+.panel-picker, .crop-controls { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 8px 0; }
+.crop-controls label { color: var(--muted); font-size: 13px; }
+.crop-controls input[type="range"] { flex: 1; min-width: 120px; accent-color: var(--accent); }
+
+.hint { color: var(--muted); font-size: 13px; }
+
+.sidebar { display: flex; flex-direction: column; gap: 14px; }
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+.card h2 { margin: 0 0 10px; font-size: 15px; letter-spacing: 0.03em; }
+
+.chip-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { border-radius: 999px; padding: 7px 13px; font-size: 13px; }
+.chip.active {
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  border-color: transparent;
+  color: #fff;
+  font-weight: 600;
+}
+.grade-chip { border-left: 4px solid var(--g1, #888); }
+
+.file-btn {
+  display: block;
+  text-align: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #7b2ff7, var(--accent-3));
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sample-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.sample-row button { flex: 1; font-size: 13px; }
+
+.tray { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.tray:empty { display: none; }
+.tray-item { position: relative; padding: 0; overflow: hidden; border-radius: 8px; }
+.tray-item img { display: block; width: 84px; height: 56px; object-fit: cover; }
+.tray-item span {
+  position: absolute;
+  left: 4px;
+  bottom: 4px;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 11px;
+}
+
+.field-label { display: block; color: var(--muted); font-size: 13px; margin: 10px 0 4px; }
+input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  color: var(--text);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.check { display: block; margin-top: 10px; font-size: 14px; color: var(--text); }
+.check input { accent-color: var(--accent); }
+
+.howto ol { margin: 0; padding-left: 20px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+
+.foot { padding: 16px 22px 28px; color: var(--muted); font-size: 12px; text-align: center; }
+
+#dropArea.dragging .stage-wrap { outline: 2px dashed var(--accent-3); outline-offset: 4px; }
+
+/* Screenshot mode: the cover fills the whole viewport, no editor chrome. */
+html.shot-mode, html.shot-mode body { margin: 0; padding: 0; background: #000; }
+html.shot-mode #shot-canvas { display: block; width: 100vw; height: 100vh; object-fit: contain; }
+
+@media (max-width: 900px) {
+  .workspace { grid-template-columns: 1fr; }
+}
