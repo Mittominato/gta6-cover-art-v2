@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Vice Sunset Cover Lab — turn your photos and a caption into bold multi-panel cover art in the style of a sunset poster, exported as a PNG. Works fully offline.">
+<meta name="theme-color" content="#0d0a18">
+<title>Vice Sunset Cover Lab — make your own multi-panel cover art</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<noscript><p style="padding:16px">Vice Sunset Cover Lab needs JavaScript to draw your cover.</p></noscript>
+<header class="masthead">
+  <div class="brand">
+    <span class="brand-mark">VS</span>
+    <div>
+      <h1>Vice Sunset Cover Lab</h1>
+      <p class="tagline">Your photos + a caption = bold multi-panel cover art. 100% offline — photos never leave your machine.</p>
+    </div>
+  </div>
+  <div class="export-row" role="group" aria-label="Export size">
+    <span class="export-label">Export PNG</span>
+    <button type="button" data-export="1080x1080">1080 × 1080</button>
+    <button type="button" data-export="1080x1350">1080 × 1350</button>
+    <button type="button" data-export="1920x1080" class="primary">1920 × 1080</button>
+  </div>
+</header>
+
+<main id="dropArea" class="workspace">
+  <section class="stage-col">
+    <div class="stage-wrap">
+      <canvas id="stage" width="960" height="600" aria-label="Live cover preview"></canvas>
+    </div>
+    <p id="notice" class="notice" role="status">Add a photo to begin — or try a sample.</p>
+    <div class="panel-picker" id="panelPicker" aria-label="Select a panel"></div>
+    <div class="crop-controls">
+      <label for="zoomRange">Zoom <span id="zoomReadout">1.12x</span></label>
+      <input id="zoomRange" type="range" min="0" max="150" value="12" step="1">
+      <button type="button" id="fillPanels">Fill all panels</button>
+      <button type="button" id="resetPanel">Reset crop</button>
+    </div>
+    <p class="hint">Drag inside the preview to pan the selected panel's photo. Click a tray photo, then a panel, to assign it. Keys 1–4 select a panel, G cycles the grade.</p>
+  </section>
+
+  <aside class="sidebar">
+    <section class="card">
+      <h2>1 · Photos</h2>
+      <label class="file-btn" for="photoInput">Add photos from your machine</label>
+      <input id="photoInput" type="file" accept="image/*" multiple hidden>
+      <div class="sample-row">
+        <button type="button" data-sample="samples/boulevard.jpg" data-name="boulevard.jpg">Try sample: Boulevard</button>
+        <button type="button" data-sample="samples/pier.jpg" data-name="pier.jpg">Try sample: Pier</button>
+      </div>
+      <div id="photoTray" class="tray"></div>
+      <p class="hint">Or drag &amp; drop image files anywhere on this page.</p>
+    </section>
+
+    <section class="card">
+      <h2>2 · Layout</h2>
+      <div id="layoutRow" class="chip-row"></div>
+    </section>
+
+    <section class="card">
+      <h2>3 · Caption</h2>
+      <label class="field-label" for="titleInput">Title</label>
+      <input id="titleInput" type="text" value="VICE SUNSET" maxlength="24">
+      <label class="field-label" for="subtitleInput">Subtitle</label>
+      <input id="subtitleInput" type="text" value="chrome, palms &amp; midnight drives" maxlength="60">
+      <label class="field-label" for="titleSizeRange">Title size</label>
+      <input id="titleSizeRange" type="range" min="60" max="140" value="100" step="1">
+      <label class="field-label" for="titleSpotSelect">Title position</label>
+      <select id="titleSpotSelect">
+        <option value="bottom-left">Bottom left</option>
+        <option value="bottom-right">Bottom right</option>
+        <option value="top-left">Top left</option>
+      </select>
+    </section>
+
+    <section class="card">
+      <h2>4 · Grade &amp; finish</h2>
+      <div id="gradeRow" class="chip-row"></div>
+      <label class="check"><input id="grainToggle" type="checkbox" checked> Film grain</label>
+      <label class="check"><input id="vignetteToggle" type="checkbox" checked> Vignette</label>
+    </section>
+
+    <section class="card howto">
+      <h2>How it works</h2>
+      <ol>
+        <li>Add one or more photos.</li>
+        <li>Pick a layout and a grade.</li>
+        <li>Edit the title, subtitle and title position.</li>
+        <li>Click a panel, drag to pan, zoom to crop.</li>
+        <li>Export a PNG in your post size.</li>
+      </ol>
+    </section>
+  </aside>
+</main>
+
+<footer class="foot">
+  <p>Vice Sunset Cover Lab — original artwork made on your machine. Fonts: Anton &amp; Lobster (SIL Open Font License, see app/fonts/OFL.txt). Sample photos are free to use.</p>
+</footer>
+
+<script type="module" src="src/main.js"></script>
+<script type="module" src="src/shots.js"></script>
+</body>
+</html>
